@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Prophecy 2026</title>
+
+<style>
+  body {
+    margin: 0;
+    background: black;
+    font-family: Arial, sans-serif;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* INTRO SCREEN */
+  .start-screen {
+    text-align: center;
+  }
+
+  .start-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 18px 35px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 20px red;
+  }
+
+  .start-text {
+    margin-top: 15px;
+    opacity: 0.8;
+    font-size: 14px;
+  }
+
+  /* POSTCARD FRAME */
+  .postcard {
+    display: none;
+    width: 720px;
+    height: 460px;
+    border: 3px solid white;
+    border-radius: 14px;
+    position: relative;
+    background: black;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0, 200, 255, 0.4);
+  }
+
+  /* GRAFFITI / SYMBOLS */
+  .graffiti {
+    position: absolute;
+    width: 100%;
+    color: white;
+    opacity: 0.15;
+    font-size: 18px;
+    letter-spacing: 12px;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .top { top: 40px; animation: leftMove 18s linear infinite; }
+  .middle { top: 210px; animation: rightMove 18s linear infinite; }
+  .bottom { bottom: 40px; animation: leftMove 18s linear infinite; }
+
+  @keyframes leftMove {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+  }
+
+  @keyframes rightMove {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(100%); }
+  }
+
+  /* HOLOGRAM HEAD */
+  .face {
+    width: 220px;
+    height: 260px;
+    margin: 60px auto 15px;
+    background: linear-gradient(180deg, #00f6ff, #0033ff);
+    border-radius: 50% 50% 45% 45%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 30px #00f6ff;
+  }
+
+  /* Glitch scan lines */
+  .face::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.15),
+      rgba(255,255,255,0.15) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+    animation: scan 3s linear infinite;
+  }
+
+  @keyframes scan {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(100%); }
+  }
+
+  /* MIRA BRAND */
+  .brand {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #a8ecff;
+    font-size: 16px;
+  }
+
+  /* MESSAGE */
+  .message {
+    text-align: center;
+    font-size: 18px;
+    color: #7fdcff;
+    padding: 0 40px;
+    line-height: 1.5;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- INTRO SCREEN -->
+<div class="start-screen" id="startScreen">
+  <button class="start-btn" onclick="showPostcard()">Push to see my prediction</button>
+  <div class="start-text">Touch if you dare</div>
+</div>
+
+<!-- POSTCARD -->
+<div class="postcard" id="postcard">
+
+  <!-- SYMBOL LINES -->
+  <div class="graffiti top"># @ % * + = ? / \ | ~ ^ & $</div>
+  <div class="graffiti middle">! < > _ : ; # @ % * + =</div>
+  <div class="graffiti bottom">$ & ^ ~ | \ / ? = + *</div>
+
+  <!-- HOLOGRAM FACE -->
+  <div class="face">
+    <div class="brand">MIRA</div>
+  </div>
+
+  <!-- PROPHECY -->
+  <div class="message">
+    In the year 2026,<br>
+    the unverified will fade into noise.<br>
+    Only what is authenticated<br>
+    shall be trusted.
+  </div>
+
+</div>
+
+<script>
+  function showPostcard() {
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("postcard").style.display = "block";
+  }
+</script>
+
+</body>
+</html>
