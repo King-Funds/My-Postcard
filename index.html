@@ -8,64 +8,109 @@
   body {
     margin: 0;
     background: black;
-    font-family: Arial, sans-serif;
-    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    color: white;
   }
 
   /* INTRO SCREEN */
-  .start-screen {
+  .intro {
     text-align: center;
+    position: relative;
   }
 
-  .start-btn {
+  .red-button {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
     background: red;
-    color: white;
     border: none;
-    padding: 18px 35px;
-    font-size: 18px;
-    border-radius: 5px;
+    color: white;
+    font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 0 20px red;
+    box-shadow: 0 0 30px red;
+    position: relative;
+    overflow: hidden;
   }
 
-  .start-text {
+  .red-button.split::before,
+  .red-button.split::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background: red;
+    top: 0;
+  }
+
+  .red-button.split::before {
+    left: 0;
+    animation: splitLeft 0.6s forwards;
+  }
+
+  .red-button.split::after {
+    right: 0;
+    animation: splitRight 0.6s forwards;
+  }
+
+  @keyframes splitLeft {
+    to { transform: translateX(-120px) rotate(-15deg); opacity: 0; }
+  }
+
+  @keyframes splitRight {
+    to { transform: translateX(120px) rotate(15deg); opacity: 0; }
+  }
+
+  .dare {
     margin-top: 15px;
-    opacity: 0.8;
     font-size: 14px;
+    opacity: 0.8;
   }
 
-  /* POSTCARD FRAME */
+  /* POSTCARD */
   .postcard {
     display: none;
-    width: 720px;
-    height: 460px;
-    border: 3px solid white;
-    border-radius: 14px;
-    position: relative;
+    width: 500px;
+    height: 625px; /* 5:4 portrait */
     background: black;
+    border: 3px solid rgba(255,255,255,0.6);
+    border-radius: 20px;
+    position: relative;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 200, 255, 0.4);
+    box-shadow: 0 0 40px rgba(125, 211, 192, 0.3);
   }
 
-  /* GRAFFITI / SYMBOLS */
-  .graffiti {
+  /* HOLOGRAPHIC OVERLAY */
+  .overlay {
     position: absolute;
     width: 100%;
-    color: white;
-    opacity: 0.15;
-    font-size: 18px;
-    letter-spacing: 12px;
-    white-space: nowrap;
+    height: 100%;
+    background: linear-gradient(
+      45deg,
+      rgba(125,211,192,0.35),
+      rgba(184,164,212,0.35)
+    );
+    mix-blend-mode: screen;
     pointer-events: none;
   }
 
-  .top { top: 40px; animation: leftMove 18s linear infinite; }
-  .middle { top: 210px; animation: rightMove 18s linear infinite; }
-  .bottom { bottom: 40px; animation: leftMove 18s linear infinite; }
+  /* SYMBOL LINES */
+  .symbols {
+    position: absolute;
+    width: 100%;
+    color: white;
+    opacity: 0.25;
+    font-size: 18px;
+    letter-spacing: 12px;
+    white-space: nowrap;
+  }
+
+  .top { top: 40px; animation: leftMove 20s linear infinite; }
+  .middle { top: 280px; animation: rightMove 20s linear infinite; }
+  .bottom { bottom: 40px; animation: leftMove 20s linear infinite; }
 
   @keyframes leftMove {
     from { transform: translateX(100%); }
@@ -77,98 +122,82 @@
     to { transform: translateX(100%); }
   }
 
-  /* HOLOGRAM HEAD */
-  .face {
-    width: 220px;
-    height: 260px;
-    margin: 60px auto 15px;
-    background: linear-gradient(180deg, #00f6ff, #0033ff);
-    border-radius: 50% 50% 45% 45%;
+  /* AI HEAD */
+  .head {
+    width: 260px;
+    height: 300px;
+    margin: 80px auto 10px;
+    background: url('https://i.imgur.com/0N6Fh6o.png') center/contain no-repeat;
+    filter: hue-rotate(180deg) brightness(1.2);
     position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 30px #00f6ff;
   }
 
-  /* Glitch scan lines */
-  .face::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.15),
-      rgba(255,255,255,0.15) 2px,
-      transparent 2px,
-      transparent 6px
-    );
-    animation: scan 3s linear infinite;
-  }
-
-  @keyframes scan {
-    from { transform: translateY(-100%); }
-    to { transform: translateY(100%); }
-  }
-
-  /* MIRA BRAND */
   .brand {
     position: absolute;
-    top: 20px;
+    top: 60px;
     left: 50%;
     transform: translateX(-50%);
+    color: #7DD3C0;
     font-weight: bold;
-    letter-spacing: 3px;
-    color: #a8ecff;
-    font-size: 16px;
+    letter-spacing: 4px;
+    font-size: 14px;
   }
 
-  /* MESSAGE */
-  .message {
+  /* PROPHECY TEXT */
+  .prophecy {
     text-align: center;
-    font-size: 18px;
-    color: #7fdcff;
-    padding: 0 40px;
+    font-size: 22px;
     line-height: 1.5;
+    padding: 0 40px;
+    margin-top: 10px;
+    color: #A8E6CF;
+    letter-spacing: 0.5px;
   }
 </style>
 </head>
 
 <body>
 
-<!-- INTRO SCREEN -->
-<div class="start-screen" id="startScreen">
-  <button class="start-btn" onclick="showPostcard()">Push to see my prediction</button>
-  <div class="start-text">Touch if you dare</div>
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <button class="red-button" id="redBtn">Push to see<br>my prediction</button>
+  <div class="dare">Touch if you dare</div>
 </div>
 
 <!-- POSTCARD -->
 <div class="postcard" id="postcard">
 
-  <!-- SYMBOL LINES -->
-  <div class="graffiti top"># @ % * + = ? / \ | ~ ^ & $</div>
-  <div class="graffiti middle">! < > _ : ; # @ % * + =</div>
-  <div class="graffiti bottom">$ & ^ ~ | \ / ? = + *</div>
+  <div class="symbols top"># @ % * + = ? / \ | ~ ^ & $</div>
+  <div class="symbols middle">! < > _ : ; # @ % * + =</div>
+  <div class="symbols bottom">$ & ^ ~ | \ / ? = + *</div>
 
-  <!-- HOLOGRAM FACE -->
-  <div class="face">
+  <div class="head">
     <div class="brand">MIRA</div>
   </div>
 
-  <!-- PROPHECY -->
-  <div class="message">
+  <div class="prophecy">
     In the year 2026,<br>
     the unverified will fade into noise.<br>
     Only what is authenticated<br>
     shall be trusted.
   </div>
 
+  <div class="overlay"></div>
 </div>
 
 <script>
-  function showPostcard() {
-    document.getElementById("startScreen").style.display = "none";
-    document.getElementById("postcard").style.display = "block";
-  }
+  const btn = document.getElementById("redBtn");
+  const intro = document.getElementById("intro");
+  const card = document.getElementById("postcard");
+
+  btn.addEventListener("click", () => {
+    btn.classList.add("split");
+
+    setTimeout(() => {
+      intro.style.display = "none";
+      card.style.display = "block";
+    }, 600);
+  });
 </script>
 
 </body>
